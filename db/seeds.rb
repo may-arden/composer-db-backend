@@ -11,3 +11,9 @@ Category.create(name: "classical")
 Category.create(name: "romantic")
 Category.create(name: "modern")
 
+Composer.create(name: "philip glass", 
+                description: "Through his operas, his symphonies, his compositions for his own ensemble, and his wide-ranging collaborations with artists ranging from Twyla Tharp to Allen Ginsberg, Leonard Cohen to David Bowie, Philip Glass has had an extraordinary and unprecedented impact upon the musical and intellectual life of his times.",
+                image_src: "https://s3.amazonaws.com/static.musicsalesclassical.com/images/composer/newsite/large/img-540.jpg",
+                category_id: 4)
+
+            
