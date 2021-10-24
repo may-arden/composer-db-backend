@@ -4,10 +4,13 @@ class ComposersController < ApplicationController
   # GET /composers or /composers.json
   def index
     @composers = Composer.all
+
+    render json: @composers 
   end
 
   # GET /composers/1 or /composers/1.json
   def show
+    render json: @composer 
   end
 
   # GET /composers/new
@@ -23,37 +26,27 @@ class ComposersController < ApplicationController
   def create
     @composer = Composer.new(composer_params)
 
-    respond_to do |format|
       if @composer.save
-        format.html { redirect_to @composer, notice: "Composer was successfully created." }
-        format.json { render :show, status: :created, location: @composer }
+        render json: @composer, status: :created, location: @category 
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @composer.errors, status: :unprocessable_entity }
+        render json: @category.errors, status: :unprocessable_entity
       end
-    end
   end
 
   # PATCH/PUT /composers/1 or /composers/1.json
   def update
-    respond_to do |format|
+
       if @composer.update(composer_params)
-        format.html { redirect_to @composer, notice: "Composer was successfully updated." }
-        format.json { render :show, status: :ok, location: @composer }
+        render json: @composer 
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @composer.errors, status: :unprocessable_entity }
+        render json: @composer.errors, status: :unprocessable_entity
       end
-    end
+
   end
 
   # DELETE /composers/1 or /composers/1.json
   def destroy
     @composer.destroy
-    respond_to do |format|
-      format.html { redirect_to composers_url, notice: "Composer was successfully destroyed." }
-      format.json { head :no_content }
-    end
   end
 
   private
