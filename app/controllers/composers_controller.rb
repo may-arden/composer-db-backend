@@ -1,5 +1,5 @@
 class ComposersController < ApplicationController
-  before_action :set_composer, only: [ :show ]
+  before_action :set_composer, only: [:show]
   before_action :set_category, only: [:index]
 
   # GET /composers or /composers.json
@@ -31,7 +31,7 @@ class ComposersController < ApplicationController
       if @composer.save
         render json: @composer, status: :created, location: @composer  
       else
-        render json: @category.errors, status: :unprocessable_entity
+        render json: @composer.errors, status: :unprocessable_entity
       end
   end
 
