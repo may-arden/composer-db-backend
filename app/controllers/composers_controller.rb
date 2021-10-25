@@ -1,9 +1,11 @@
 class ComposersController < ApplicationController
-  before_action :set_composer, only: %i[ show edit update destroy ]
+  before_action :set_composer, only: [ :show ]
+  before_action :set_category, only: [:index]
 
   # GET /composers or /composers.json
   def index
-    @composers = Composer.all
+    # @composers = Composer.all
+    @composers = @category.composers 
 
     render json: @composers 
   end
@@ -14,9 +16,9 @@ class ComposersController < ApplicationController
   end
 
   # GET /composers/new
-  def new
-    @composer = Composer.new
-  end
+  # def new
+  #   @composer = Composer.new
+  # end
 
   # GET /composers/1/edit
   def edit
@@ -27,33 +29,37 @@ class ComposersController < ApplicationController
     @composer = Composer.new(composer_params)
 
       if @composer.save
-        render json: @composer, status: :created, location: @category 
+        render json: @composer, status: :created, location: @composer  
       else
         render json: @category.errors, status: :unprocessable_entity
       end
   end
 
   # PATCH/PUT /composers/1 or /composers/1.json
-  def update
+  # def update
 
-      if @composer.update(composer_params)
-        render json: @composer 
-      else
-        render json: @composer.errors, status: :unprocessable_entity
-      end
+  #     if @composer.update(composer_params)
+  #       render json: @composer 
+  #     else
+  #       render json: @composer.errors, status: :unprocessable_entity
+  #     end
 
-  end
+  # end
 
   # DELETE /composers/1 or /composers/1.json
-  def destroy
-    @composer.destroy
-  end
+  # def destroy
+  #   @composer.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_composer
       @composer = Composer.find(params[:id])
     end
+
+    def set_category 
+      @category = Category.find(params[:category_id])
+    end 
 
     # Only allow a list of trusted parameters through.
     def composer_params
